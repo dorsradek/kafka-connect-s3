@@ -31,13 +31,13 @@ import static java.util.stream.Collectors.toList;
  */
 public class BlockGZIPFileWriter implements Closeable {
 
-  private String filenameBase;
-  private String path;
+  private final String filenameBase;
+  private final String path;
   private GZIPOutputStream gzipStream;
-  private CountingOutputStream fileStream;
+  private final CountingOutputStream fileStream;
   private final ObjectMapper objectMapper = new ObjectMapper();
 
-  private class Chunk {
+  private static class Chunk {
     public long rawBytes = 0;
     public long byteOffset = 0;
     public long compressedByteLength = 0;
@@ -55,10 +55,10 @@ public class BlockGZIPFileWriter implements Closeable {
     }
   }
 
-  private class CountingOutputStream extends FilterOutputStream {
+  private static class CountingOutputStream extends FilterOutputStream {
     private long numBytes = 0;
 
-    CountingOutputStream(OutputStream out) throws IOException {
+    CountingOutputStream(OutputStream out) {
       super(out);
     }
 
@@ -85,15 +85,15 @@ public class BlockGZIPFileWriter implements Closeable {
     }
   }
 
-  private ArrayList<Chunk> chunks;
+  private final ArrayList<Chunk> chunks;
 
   // Default each chunk is 64MB of uncompressed data
-  private long chunkThreshold;
+  private final long chunkThreshold;
 
   // Offset to the first record.
   // Set to non-zero if this file is part of a larger stream and you want
   // record offsets in the index to reflect the global offset rather than local
-  private long firstRecordOffset;
+  private final long firstRecordOffset;
 
   public BlockGZIPFileWriter(String filenameBase, String path) throws IOException {
     this(filenameBase, path, 0, 67108864);

@@ -11,10 +11,6 @@ public class S3SourceConfig {
   public S3FilesReader.InputFilter inputFilter = S3FilesReader.InputFilter.GUNZIP;
   public S3FilesReader.PartitionFilter partitionFilter = S3FilesReader.PartitionFilter.MATCH_ALL;
 
-  public S3SourceConfig(String bucket) {
-    this.bucket = bucket;
-  }
-
   public S3SourceConfig(String bucket, String keyPrefix, int pageSize, String startMarker, Pattern keyPattern, S3FilesReader.InputFilter inputFilter, S3FilesReader.PartitionFilter partitionFilter) {
     this.bucket = bucket;
     this.keyPrefix = keyPrefix;

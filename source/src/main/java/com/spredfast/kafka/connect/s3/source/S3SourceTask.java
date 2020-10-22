@@ -193,7 +193,7 @@ public class S3SourceTask extends SourceTask {
   }
 
   @Override
-  public void commit() throws InterruptedException {
+  public void commit() {
     log.debug("{} Commit offsets {}", name(), offsets);
   }
 
