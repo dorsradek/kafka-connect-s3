@@ -49,7 +49,6 @@ public class S3FilesReaderTest {
     thenTheyAreFilteredAndInOrder(results);
   }
 
-
   @Test
   public void testReadingBytesFromS3_multiPartition() throws IOException {
     // scenario: multiple partition files at the end of a listing, page size >  # of files
@@ -82,7 +81,6 @@ public class S3FilesReaderTest {
       "willbe=skipped9"
     ), results);
   }
-
 
   @Test
   public void testReadingBytesFromS3_withOffsetsAtEndOfFile() throws IOException {
@@ -256,7 +254,6 @@ public class S3FilesReaderTest {
       }
     }).when(client).listObjects(any(ListObjectsRequest.class));
 
-
     doCallRealMethod().when(client).listNextBatchOfObjects(any(ObjectListing.class));
     doCallRealMethod().when(client).listNextBatchOfObjects(any(ListNextBatchOfObjectsRequest.class));
 
@@ -264,7 +261,6 @@ public class S3FilesReaderTest {
       String key = (String) invocationOnMock.getArguments()[1];
       return getFile(key, dir);
     }).when(client).getObject(anyString(), anyString());
-
 
     doAnswer((Answer<S3Object>) invocationOnMock -> {
       String key = ((GetObjectRequest) invocationOnMock.getArguments()[0]).getKey();
@@ -338,6 +334,4 @@ public class S3FilesReaderTest {
   private void write(BlockGZIPFileWriter writer, byte[] key, byte[] value, boolean includeKeys) throws IOException {
     writer.write(new ByteLengthFormat(includeKeys).newWriter().writeBatch(Stream.of(new ProducerRecord<>("", key, value))).collect(toList()), 1);
   }
-
-
 }

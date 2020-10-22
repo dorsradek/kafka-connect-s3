@@ -24,7 +24,6 @@ public class FakeS3 {
   private final int hostPort;
   private final ContainerCreation container;
 
-
   private FakeS3(int hostPort, ContainerCreation container) {
     this.hostPort = hostPort;
     this.container = container;

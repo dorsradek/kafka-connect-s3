@@ -102,7 +102,6 @@ public class S3SourceTask extends SourceTask {
 
     AmazonS3 client = S3.s3client(taskConfig);
 
-
     S3SourceConfig config = new S3SourceConfig(
       bucket, prefix,
       configGet("s3.page.size").map(Integer::parseInt).orElse(100),
@@ -122,7 +121,6 @@ public class S3SourceTask extends SourceTask {
   private Optional<String> configGet(String key) {
     return Optional.ofNullable(taskConfig.get(key));
   }
-
 
   @Override
   public List<SourceRecord> poll() throws InterruptedException {
@@ -214,5 +212,4 @@ public class S3SourceTask extends SourceTask {
   public void stop() {
     this.stopped.set(true);
   }
-
 }

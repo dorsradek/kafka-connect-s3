@@ -88,7 +88,6 @@ public class S3ConnectorIntegrationTest {
     return DefaultDockerClient.fromEnv().build();
   }
 
-
   @AfterClass
   public static void stopKafka() throws Exception {
     tryClose(connect);
@@ -112,7 +111,6 @@ public class S3ConnectorIntegrationTest {
     connect.herder().connectors((e, connectors) ->
       connectors.forEach(this::whenTheSinkIsStopped));
   }
-
 
   private void whenTheSinkIsStopped(String name) {
     connect.herder().putConnectorConfig(name, null, true,
@@ -194,7 +192,6 @@ public class S3ConnectorIntegrationTest {
     thenTempFilesAreCleanedUp(sinkConfig);
   }
 
-
   private void thenTempFilesAreCleanedUp(Map<String, String> sinkConfig) {
     //noinspection ConstantConditions
     waitForPassing(Duration.ofSeconds(3), () ->
@@ -243,12 +240,10 @@ public class S3ConnectorIntegrationTest {
     connect.close();
   }
 
-
   private Consumer<String, String> givenAConsumer() {
     return new KafkaConsumer<>(ImmutableMap.of("bootstrap.servers", "localhost:" + kafka.localPort()),
       new StringDeserializer(), new StringDeserializer());
   }
-
 
   private AmazonS3 givenS3Client(Map<String, String> config) {
     AmazonS3 s3 = S3.s3client(config);
@@ -283,7 +278,6 @@ public class S3ConnectorIntegrationTest {
       assertTrue(startOffsets + "[0] !~ " + offsets, ofNullable(startOffsets.get(0)).orElse(-1L) >= offsets.get(0));
       assertTrue(startOffsets + "[1] !~ " + offsets, ofNullable(startOffsets.get(1)).orElse(-1L) >= offsets.get(1));
     });
-
   }
 
   @SafeVarargs
@@ -292,7 +286,6 @@ public class S3ConnectorIntegrationTest {
       assertEquals(message, expected[0], actual);
     }
   }
-
 
   private Map<String, String> givenSourceConfig(String sourceTopic, String sinkTopic) throws IOException {
     return s3Config(ImmutableMap.<String, String>builder()
@@ -413,7 +406,6 @@ public class S3ConnectorIntegrationTest {
   private void thenMoreMessagesAreRestored(String sourceTopic, AmazonS3 s3) {
     thenMessagesAreRestored(sourceTopic, 5, s3);
   }
-
 
   private Producer<String, String> givenKafkaProducer() {
     return new KafkaProducer<>(ImmutableMap.<String, Object>builder()

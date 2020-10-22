@@ -22,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-
 /**
  * S3Writer provides necessary operations over S3 to store files and retrieve
  * Last commit offsets for a TopicPartition.

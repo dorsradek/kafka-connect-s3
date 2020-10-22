@@ -18,7 +18,6 @@ public class ByteLengthFormatTest {
     FormatTests.roundTrip_singlePartition_fromZero_withNullKeys(givenFormatWithConfig(ImmutableMap.of("include.keys", "true")), givenValues());
   }
 
-
   private ImmutableList<String> givenValues() {
     return ImmutableList.of("abcd", "567\tav", "238473210984712309\n84710923847231098472390847324098543298652938475\n49837");
   }
@@ -28,5 +27,4 @@ public class ByteLengthFormatTest {
     format.configure(configs);
     return format;
   }
-
 }

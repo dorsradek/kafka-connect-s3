@@ -18,7 +18,6 @@ public abstract class Configure {
     put("text", TrailingDelimiterFormat.class.getName());
   }});
 
-
   /**
    * Create and configure a new Converter instance.
    *

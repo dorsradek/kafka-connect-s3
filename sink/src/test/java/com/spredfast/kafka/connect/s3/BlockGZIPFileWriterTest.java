@@ -42,7 +42,6 @@ public class BlockGZIPFileWriterTest {
     assertEquals(tmpDir + "/foo-000000000000.gz", w.getDataFilePath());
     assertEquals(tmpDir + "/foo-000000000000.index.json", w.getIndexFilePath());
 
-
     BlockGZIPFileWriter w2 = new BlockGZIPFileWriter("foo", tmpDir, 123456);
     assertEquals(tmpDir + "/foo-000000123456.gz", w2.getDataFilePath());
     assertEquals(tmpDir + "/foo-000000123456.index.json", w2.getIndexFilePath());
@@ -176,7 +175,6 @@ public class BlockGZIPFileWriterTest {
       // Just check it actually write to disk
       verifyOutputIsSaneGZIPFile(w.getDataFilePath(), expectedLines);
       verifyIndexFile(w, 0, expectedLines);
-
     }
 
     {

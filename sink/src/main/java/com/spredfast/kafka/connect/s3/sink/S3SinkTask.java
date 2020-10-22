@@ -21,7 +21,6 @@ import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
-
 public class S3SinkTask extends SinkTask {
 
   private static final Logger log = LoggerFactory.getLogger(S3SinkTask.class);
@@ -214,6 +213,5 @@ public class S3SinkTask extends SinkTask {
       delete();
       time.stop();
     }
-
   }
 }

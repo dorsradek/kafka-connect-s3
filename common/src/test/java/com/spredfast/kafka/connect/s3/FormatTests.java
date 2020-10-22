@@ -63,6 +63,4 @@ public class FormatTests {
     reader.readAll("topic", 0, in, startOffset).forEachRemaining(results::add);
     return results;
   }
-
-
 }

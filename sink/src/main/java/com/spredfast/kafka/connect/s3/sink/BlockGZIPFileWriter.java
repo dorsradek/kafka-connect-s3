@@ -169,7 +169,6 @@ public class BlockGZIPFileWriter implements Closeable {
     return String.format("%s/%s", path, this.getIndexFileName());
   }
 
-
   /**
    * @param toWrite     the bytes to write.
    * @param recordCount how many records these bytes represent.

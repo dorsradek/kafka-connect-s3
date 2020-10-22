@@ -57,5 +57,4 @@ public interface RecordReader extends S3RecordsReader {
       }
     };
   }
-
 }

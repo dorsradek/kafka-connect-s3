@@ -34,7 +34,6 @@ public class S3 {
     return clientConfiguration;
   }
 
-
   /**
    * Creates and configures S3 client.
    * Visible for testing.
@@ -63,5 +62,4 @@ public class S3 {
 
     return builder.build();
   }
-
 }

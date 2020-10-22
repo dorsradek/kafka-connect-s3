@@ -302,7 +302,6 @@ public class S3FilesReader implements Iterable<S3SourceRecord> {
     return consumer.consume(topic, partition, startOffset);
   }
 
-
   private interface QuietKeyConsumer<T> {
     T consume(String topic, int partition, long startOffset);
   }
@@ -325,5 +324,4 @@ public class S3FilesReader implements Iterable<S3SourceRecord> {
 
     InputFilter GUNZIP = GZIPInputStream::new;
   }
-
 }

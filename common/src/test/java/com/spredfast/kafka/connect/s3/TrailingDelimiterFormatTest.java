@@ -59,5 +59,4 @@ public class TrailingDelimiterFormatTest {
     format.configure(configs);
     return format;
   }
-
 }

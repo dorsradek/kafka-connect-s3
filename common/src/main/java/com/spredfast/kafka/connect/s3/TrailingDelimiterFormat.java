@@ -72,5 +72,4 @@ public class TrailingDelimiterFormat implements S3RecordFormat, Configurable {
   public S3RecordsReader newReader() {
     return new DelimitedRecordReader(valueDelimiter, keyDelimiter);
   }
-
 }

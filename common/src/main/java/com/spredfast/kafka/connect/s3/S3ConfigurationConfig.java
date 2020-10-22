@@ -12,7 +12,6 @@
  * WARRANTIES OF ANY KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations under the License.
  */
-
 package com.spredfast.kafka.connect.s3;
 
 import com.amazonaws.ClientConfiguration;
@@ -73,7 +72,6 @@ public class S3ConfigurationConfig extends HashMap<String, Object> {
   public static final String S3_ENDPOINT_URL_CONFIG = "s3.endpoint";
   public static final String S3_ENDPOINT_URL_DEFAULT = "";
 
-
   public static final String S3_PROXY_URL_CONFIG = "s3.proxy.url";
   public static final String S3_PROXY_URL_DEFAULT = "";
 
@@ -88,10 +86,8 @@ public class S3ConfigurationConfig extends HashMap<String, Object> {
   public static final boolean HEADERS_USE_EXPECT_CONTINUE_DEFAULT =
     ClientConfiguration.DEFAULT_USE_EXPECT_CONTINUE;
 
-
   public static final String S3_RETRY_BACKOFF_CONFIG = "s3.retry.backoff.ms";
   public static final int S3_RETRY_BACKOFF_DEFAULT = 200;
-
 
   public static ConfigDef newConfigDef() {
     ConfigDef configDef = new ConfigDef();
@@ -331,11 +327,9 @@ public class S3ConfigurationConfig extends HashMap<String, Object> {
         Width.SHORT,
         "S3 HTTP Send Uses Expect Continue"
       );
-
     }
     return configDef;
   }
-
 
   public Object get(String key) {
     Object config = super.get(key);
@@ -489,5 +483,4 @@ public class S3ConfigurationConfig extends HashMap<String, Object> {
       return "Any class implementing: " + AWSCredentialsProvider.class;
     }
   }
-
 }

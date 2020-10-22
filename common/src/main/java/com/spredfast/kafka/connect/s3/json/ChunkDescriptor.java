@@ -18,5 +18,4 @@ public class ChunkDescriptor {
 
   @JsonProperty
   public long first_record_offset;
-
 }

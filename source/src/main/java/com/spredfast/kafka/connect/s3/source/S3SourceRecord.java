@@ -8,7 +8,6 @@ public class S3SourceRecord {
   private final byte[] key;
   private final byte[] value;
 
-
   public S3SourceRecord(S3Partition file, S3Offset offset, String topic, int partition, byte[] key, byte[] value) {
     this.file = file;
     this.offset = offset;

@@ -204,6 +204,5 @@ public class S3WriterTest {
     assertEquals(12031 + 34, offset);
     verify(s3Mock).getObject(eq(testBucket), eq("pfx/last_chunk_index.bar-00000.txt"));
     verify(s3Mock).getObject(eq(testBucket), eq(indexKey));
-
   }
 }
