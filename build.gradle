@@ -9,31 +9,18 @@
   OF ANY KIND, either express or implied. See the License for the specific language
   governing permissions and limitations under the License.
 */
-
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
-import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
-
 plugins {
   id 'base'
   id 'java'
   id 'maven-publish'
   id 'com.palantir.git-version' version '0.12.3'
   id 'com.github.johnrengelman.shadow' version '6.1.0'
-  id 'project-report'
-  id 'com.bmuschko.docker-remote-api' version '6.4.0'
 }
 
 description = "kafka-connect-s3"
 apply from: 'dependencies.gradle'
 
 version = System.getenv("PROJECT_VERSION") ?: getProjectVersion()
-
-ext {
-  pomHumanName = 'Kafka Connect S3'
-  pomDesc = 'S3 Source and Sink Connectors for Kafka Connect'
-  dockerRegistry = "docker-pipeline-release.dr-uw2.adobeitc.com"
-  baseDockerTag = "$dockerRegistry/kafka-s3-backup-libs"
-}
 
 allprojects {
   apply plugin: 'java'
@@ -48,22 +35,11 @@ allprojects {
     jcenter()
     maven { url "https://repo.maven.apache.org/maven2" }
   }
-
-  test {
-    beforeTest { descriptor ->
-      logger.lifecycle("Running test: " + descriptor)
-    }
-  }
-}
-
-configurations {
-  javaagent
 }
 
 dependencies {
   compile project(':sink')
   compile project(':source')
-  javaagent libraries.javaagent
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
@@ -84,29 +60,6 @@ artifacts {
   archives javadocJar, sourcesJar
 }
 
-task libs {
-
-  dependsOn 'shadowJar'
-
-  doLast {
-    copy {
-      from(shadowJar)
-      into("$buildDir/dependencies/connectors")
-    }
-
-    copy {
-      from(configurations.compileClasspath)
-      into("$buildDir/dependencies/compile")
-    }
-
-    copy {
-      from(configurations.javaagent)
-      into("$buildDir/dependencies/javaagent")
-      rename("(jmx_prometheus_javaagent)-(.+)(\\.jar)", '$1$3')
-    }
-  }
-}
-
 shadowJar {
   dependencies {
     // provided in the connect classpath
@@ -122,25 +75,6 @@ shadowJar {
   relocate 'org.apache.http', 'com.spredfast.shade.apache.http'
   relocate 'org.joda', 'com.spredfast.shade.joda'
 }
-
-
-docker {
-  registryCredentials {
-    url = dockerRegistry
-    username = System.getenv("DOCKER_REPO_USER")
-    password = System.getenv("DOCKER_REPO_PASS")
-  }
-}
-
-task dockerBuildImage(type: DockerBuildImage, dependsOn: 'libs') {
-  inputDir = file("$rootDir")
-  images = ["$baseDockerTag:$version"]
-}
-
-task dockerPushImage(type: DockerPushImage) {
-  images = ["$baseDockerTag:$version"]
-}
-
 
 def getProjectVersion() {
   def tag = 'git describe --abbrev=0 --tags'.execute().text.trim()

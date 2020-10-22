@@ -46,10 +46,6 @@ libraries.jakartaXml = [
   "jakarta.xml.bind:jakarta.xml.bind-api:$versions.jakartaXml"
 ]
 
-libraries.javaagent = [
-  "io.prometheus.jmx:jmx_prometheus_javaagent:0.13.0"
-]
-
 libraries.junit = [
   "junit:junit:$versions.junit"
 ]
