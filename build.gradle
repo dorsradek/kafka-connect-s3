@@ -9,20 +9,17 @@
   OF ANY KIND, either express or implied. See the License for the specific language
   governing permissions and limitations under the License.
 */
+
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
-import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
-
 
 plugins {
   id 'base'
   id 'java'
   id 'maven-publish'
   id 'com.palantir.git-version' version '0.12.3'
-  id 'com.github.johnrengelman.shadow' version '5.2.0'
+  id 'com.github.johnrengelman.shadow' version '6.1.0'
   id 'project-report'
-  id 'org.unbroken-dome.helm' version '1.1.1'
-  id 'org.unbroken-dome.helm-publish' version '1.1.1'
   id 'com.bmuschko.docker-remote-api' version '6.4.0'
 }
 
@@ -48,6 +45,7 @@ allprojects {
   targetCompatibility = 1.8
 
   repositories {
+    jcenter()
     maven { url "https://repo.maven.apache.org/maven2" }
   }
 
@@ -125,36 +123,6 @@ shadowJar {
   relocate 'org.joda', 'com.spredfast.shade.joda'
 }
 
-helm {
-  xdgCacheHome = file("$buildDir/helm/cache")
-
-  filtering.enabled = false
-
-  lint {
-    strict = false
-  }
-
-  charts {
-    pipeline {
-      chartName = "kafka-s3-backup"
-      sourceDir = file("$rootDir/helm/kafka-s3-backup")
-    }
-  }
-
-  publishing {
-    repositories {
-      custom {
-        url = uri(System.getenv("HELM_REPO_URL") ?: "")
-        uploadMethod = 'PUT'
-        uploadPath = '/{name}/{filename}'
-        credentials {
-          username = System.getenv("HELM_REPO_USER")
-          password = System.getenv("HELM_REPO_PASS")
-        }
-      }
-    }
-  }
-}
 
 docker {
   registryCredentials {

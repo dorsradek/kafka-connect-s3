@@ -14,5 +14,5 @@ apply from: '../dependencies.gradle'
 description = ""
 
 dependencies {
-    compile libraries.kafkaConnectApi
+  compile libraries.kafkaConnectApi
 }

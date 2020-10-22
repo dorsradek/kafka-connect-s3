@@ -14,9 +14,9 @@ apply from: '../dependencies.gradle'
 description = ""
 
 dependencies {
-	compile project(':api')
-	libraries.with {
-		compile awsSdkS3, jackson, jakartaXml, kafkaConnectApi
-		testCompile guava, junit, mockito
-	}
+  compile project(':api')
+  libraries.with {
+    compile awsSdkS3, jackson, jakartaXml, kafkaConnectApi
+    testCompile guava, junit, mockito
+  }
 }

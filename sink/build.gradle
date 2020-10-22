@@ -14,9 +14,9 @@ apply from: '../dependencies.gradle'
 description = "Kafka Connect Sink that writes to S3"
 
 dependencies {
-    compile project(':common')
+  compile project(':common')
 
-	libraries.with {
-	  testCompile junit, mockito
-	}
+  libraries.with {
+    testCompile junit, mockito
+  }
 }

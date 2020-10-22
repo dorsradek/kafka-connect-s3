@@ -6,3 +6,4 @@ local-*
 *.iws
 .gradle
 out
+.DS_Store
